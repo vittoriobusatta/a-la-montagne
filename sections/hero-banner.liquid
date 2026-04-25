@@ -1,13 +1,13 @@
 {% liquid
-  assign hero_height_class = 'min-h-[84svh]'
+  assign hero_height_class = 'min-h-[55svh] md:min-h-[84svh]'
 
   case section.settings.hero_height
     when 'small'
-      assign hero_height_class = 'min-h-[60svh]'
+      assign hero_height_class = 'min-h-[40svh] md:min-h-[60svh]'
     when 'medium'
-      assign hero_height_class = 'min-h-[72svh]'
+      assign hero_height_class = 'min-h-[50svh] md:min-h-[72svh]'
     when 'large'
-      assign hero_height_class = 'min-h-[84svh]'
+      assign hero_height_class = 'min-h-[55svh] md:min-h-[84svh]'
     when 'screen'
       assign hero_height_class = 'min-h-[100svh]'
   endcase
