@@ -147,6 +147,13 @@
         "logo_width": {
           "label": "Width"
         },
+        "logo_mobile_image": {
+          "label": "Mobile logo",
+          "info": "If empty, the desktop logo will be used"
+        },
+        "logo_mobile_width": {
+          "label": "Mobile logo width"
+        },
         "favicon": {
           "label": "Favicon",
           "info": "Displayed at 32 x 32px"

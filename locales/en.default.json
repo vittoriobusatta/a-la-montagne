@@ -63,6 +63,7 @@
     "button_label": "Subscribe"
   },
   "accessibility": {
+    "open_menu": "Open menu",
     "skip_to_text": "Skip to content",
     "skip_to_product_info": "Skip to product information",
     "close": "Close",

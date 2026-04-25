@@ -27,6 +27,22 @@
       },
       {
         "type": "image_picker",
+        "id": "logo_mobile",
+        "label": "t:settings_schema.logo.settings.logo_mobile_image.label",
+        "info": "t:settings_schema.logo.settings.logo_mobile_image.info"
+      },
+      {
+        "type": "range",
+        "id": "logo_mobile_width",
+        "min": 50,
+        "max": 300,
+        "step": 10,
+        "default": 80,
+        "unit": "px",
+        "label": "t:settings_schema.logo.settings.logo_mobile_width.label"
+      },
+      {
+        "type": "image_picker",
         "id": "favicon",
         "label": "t:settings_schema.logo.settings.favicon.label",
         "info": "t:settings_schema.logo.settings.favicon.info"
