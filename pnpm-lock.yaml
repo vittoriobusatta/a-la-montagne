@@ -11,6 +11,9 @@ importers:
       '@tailwindcss/cli':
         specifier: ^4.2.3
         version: 4.2.4
+      lenis:
+        specifier: ^1.3.23
+        version: 1.3.23
       tailwindcss:
         specifier: ^4.2.3
         version: 4.2.4
@@ -518,6 +521,20 @@ packages:
   json-stringify-safe@5.0.1:
     resolution: {integrity: sha512-ZClg6AaYvamvYEE82d3Iyd3vSSIjQ+odgjaTzRuO3s7toCdFKczob2i0zCh7JE8kWn17yvAWhUVxvqGwUalsRA==}
 
+  lenis@1.3.23:
+    resolution: {integrity: sha512-YxYq3TJqj9sJNv0V9SkyQHejt14xwyIwgDaaMK89Uf9SxQfIszu+gTQSSphh6BWlLTNVKvvXAGkg+Zf+oFIevg==}
+    peerDependencies:
+      '@nuxt/kit': '>=3.0.0'
+      react: '>=17.0.0'
+      vue: '>=3.0.0'
+    peerDependenciesMeta:
+      '@nuxt/kit':
+        optional: true
+      react:
+        optional: true
+      vue:
+        optional: true
+
   lightningcss-android-arm64@1.32.0:
     resolution: {integrity: sha512-YK7/ClTt4kAK0vo6w3X+Pnm0D2cf2vPHbhOXdoNti1Ga0al1P4TBZhwjATvjNwLEBCnKvjJc2jQgHXH0NEwlAg==}
     engines: {node: '>= 12.0.0'}
@@ -1017,6 +1034,8 @@ snapshots:
   jiti@2.6.1: {}
 
   json-stringify-safe@5.0.1: {}
+
+  lenis@1.3.23: {}
 
   lightningcss-android-arm64@1.32.0:
     optional: true

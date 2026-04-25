@@ -14,7 +14,7 @@
 %}
 
 <section
-  class="full-width relative overflow-hidden bg-gray-100 bg-cover bg-center"
+  class="full-width grid overflow-hidden bg-gray-100 bg-cover bg-center"
   style="
     background-image: url({{ section.settings.image | image_url: width: 2000 }});
     padding-top: {{ section.settings.padding_top }}px;
@@ -22,11 +22,11 @@
   "
 >
   <div
-    class="pointer-events-none absolute inset-0 z-0"
-    style="background-color: rgb(0 0 0 / {{ section.settings.overlay_opacity }}%)"
+    class="pointer-events-none col-start-1 row-start-1"
+    style="background-color: rgba(0, 0, 0, {{ section.settings.overlay_opacity | divided_by: 100.0 }})"
   ></div>
 
-  <div class="relative z-10 flex {{ hero_height_class }} items-end justify-center p-10 uppercase">
+  <div class="col-start-1 row-start-1 z-10 flex {{ hero_height_class }} items-end justify-center p-10 uppercase">
     <a class="text-white text-sm" href="{{ section.settings.button_link }}">
       {{ section.settings.button_label }}
     </a>

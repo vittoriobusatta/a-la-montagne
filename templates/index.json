@@ -6,7 +6,7 @@
         "heading": "New arrivals",
         "button_label": "Shop now",
         "button_link": "shopify://collections/all",
-        "hero_height": "screen",
+        "hero_height": "large",
         "overlay_opacity": 60
       }
     },

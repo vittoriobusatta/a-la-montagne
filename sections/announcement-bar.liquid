@@ -9,10 +9,6 @@
       animation: announcement-marquee var(--marquee-speed, 10s) linear infinite;
     }
 
-    .announcement-marquee__track[data-pause-hover]:hover {
-      animation-play-state: paused;
-    }
-
     @media (prefers-reduced-motion: reduce) {
       .announcement-marquee__track { animation: none !important; }
     }
@@ -24,11 +20,10 @@
   >
     <div
       class="announcement-marquee__track flex w-max will-change-transform"
-      {% if section.settings.pause_on_hover %}data-pause-hover{% endif %}
     >
       <div class="announcement-marquee__set flex items-center shrink-0 py-2.5">
         {%- for block in section.blocks -%}
-          <span class="whitespace-nowrap text-xs font-medium uppercase" {{ block.shopify_attributes }}>
+          <span class="whitespace-nowrap text-xs font-light uppercase" {{ block.shopify_attributes }}>
             {%- if block.settings.link != blank -%}
               <a href="{{ block.settings.link }}" class="no-underline text-inherit hover:underline hover:underline-offset-2">
             {%- endif -%}
@@ -104,13 +99,7 @@
     {
       "type": "text",
       "id": "separator",
-      "label": "t:sections.announcement-bar.settings.separator.label",
-    },
-    {
-      "type": "checkbox",
-      "id": "pause_on_hover",
-      "label": "t:sections.announcement-bar.settings.pause_on_hover.label",
-      "default": true
+      "label": "t:sections.announcement-bar.settings.separator.label"
     }
   ],
   "blocks": [
