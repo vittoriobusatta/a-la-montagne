@@ -1,0 +1,36 @@
+{% style %}
+  @font-face {
+    font-family: 'Geist';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url({{ 'geist-400.ttf' | asset_url }}) format('truetype');
+  }
+
+  @font-face {
+    font-family: 'Geist';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url({{ 'geist-500.ttf' | asset_url }}) format('truetype');
+  }
+
+  @font-face {
+    font-family: 'Geist';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url({{ 'geist-700.ttf' | asset_url }}) format('truetype');
+  }
+
+  :root {
+    --font-primary--family: 'Geist', {{ settings.type_primary_font.family }}, {{ settings.type_primary_font.fallback_families }};
+    --font-primary--style: normal;
+    --font-primary--weight: 400;
+    --page-width: {{ settings.max_page_width }};
+    --page-margin: {{ settings.min_page_margin }}px;
+    --color-background: {{ settings.background_color }};
+    --color-foreground: {{ settings.foreground_color }};
+    --style-border-radius-inputs: {{ settings.input_corner_radius }}px;
+  }
+{% endstyle %}

@@ -1,0 +1,348 @@
+{% liquid
+  assign layout_class = 'grid-cols-1'
+  if section.settings.layout == 'two_images'
+    assign layout_class = 'grid-cols-1 md:grid-cols-2'
+  endif
+
+  assign ratio_class = 'aspect-[4/5]'
+  case section.settings.image_ratio
+    when 'landscape'
+      assign ratio_class = 'aspect-[16/9]'
+    when 'portrait'
+      assign ratio_class = 'aspect-[4/5]'
+    when 'square'
+      assign ratio_class = 'aspect-square'
+    when 'wide'
+      assign ratio_class = 'aspect-[21/9]'
+    when 'screen'
+      assign ratio_class = 'h-[100svh]'
+  endcase
+
+  assign fit_class = 'object-cover'
+  if section.settings.image_fit == 'contain'
+    assign fit_class = 'object-contain'
+  endif
+
+  assign position_1_class = 'object-center'
+  case section.settings.image_1_position
+    when 'top'
+      assign position_1_class = 'object-top'
+    when 'bottom'
+      assign position_1_class = 'object-bottom'
+    when 'left'
+      assign position_1_class = 'object-left'
+    when 'right'
+      assign position_1_class = 'object-right'
+  endcase
+
+  assign position_2_class = 'object-center'
+  case section.settings.image_2_position
+    when 'top'
+      assign position_2_class = 'object-top'
+    when 'bottom'
+      assign position_2_class = 'object-bottom'
+    when 'left'
+      assign position_2_class = 'object-left'
+    when 'right'
+      assign position_2_class = 'object-right'
+  endcase
+
+  assign gap_class = 'gap-0'
+  case section.settings.gap
+    when 'small'
+      assign gap_class = 'gap-2'
+    when 'medium'
+      assign gap_class = 'gap-4'
+    when 'large'
+      assign gap_class = 'gap-8'
+  endcase
+
+  assign width_class = 'max-w-none'
+  if section.settings.width == 'contained'
+    assign width_class = 'max-w-[1600px]'
+  endif
+
+  assign image_1_class = 'h-full w-full ' | append: fit_class | append: ' ' | append: position_1_class
+  assign image_2_class = 'h-full w-full ' | append: fit_class | append: ' ' | append: position_2_class
+%}
+
+<section
+  class="full-width color-{{ section.settings.color_scheme }} bg-[rgb(var(--color-background))] px-0"
+  style="
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  "
+>
+  <div class="mx-auto {{ width_class }}">
+    <div class="grid {{ layout_class }} {{ gap_class }}">
+      {% if section.settings.image_1_link != blank %}
+        <a class="block overflow-hidden bg-neutral-100" href="{{ section.settings.image_1_link }}">
+      {% else %}
+        <div class="block overflow-hidden bg-neutral-100">
+      {% endif %}
+        <div class="{{ ratio_class }}">
+          {% if section.settings.image_1 != blank %}
+            {{
+              section.settings.image_1
+              | image_url: width: 1600
+              | image_tag:
+                loading: 'lazy',
+                widths: '480, 720, 960, 1200, 1600',
+                sizes: '(min-width: 768px) 50vw, 100vw',
+                class: image_1_class
+            }}
+          {% else %}
+            {{ 'image' | placeholder_svg_tag: 'h-full w-full text-neutral-300' }}
+          {% endif %}
+        </div>
+      {% if section.settings.image_1_link != blank %}
+        </a>
+      {% else %}
+        </div>
+      {% endif %}
+
+      {% if section.settings.layout == 'two_images' %}
+        {% if section.settings.image_2_link != blank %}
+          <a class="block overflow-hidden bg-neutral-100" href="{{ section.settings.image_2_link }}">
+        {% else %}
+          <div class="block overflow-hidden bg-neutral-100">
+        {% endif %}
+          <div class="{{ ratio_class }}">
+            {% if section.settings.image_2 != blank %}
+              {{
+                section.settings.image_2
+                | image_url: width: 1600
+                | image_tag:
+                  loading: 'lazy',
+                  widths: '480, 720, 960, 1200, 1600',
+                  sizes: '(min-width: 768px) 50vw, 100vw',
+                  class: image_2_class
+              }}
+            {% else %}
+              {{ 'image' | placeholder_svg_tag: 'h-full w-full text-neutral-300' }}
+            {% endif %}
+          </div>
+        {% if section.settings.image_2_link != blank %}
+          </a>
+        {% else %}
+          </div>
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Image pair",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        {
+          "value": "one_image",
+          "label": "1 image"
+        },
+        {
+          "value": "two_images",
+          "label": "2 images"
+        }
+      ],
+      "default": "two_images"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Image 1"
+    },
+    {
+      "type": "url",
+      "id": "image_1_link",
+      "label": "Image 1 link"
+    },
+    {
+      "type": "select",
+      "id": "image_1_position",
+      "label": "Image 1 position",
+      "options": [
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Image 2"
+    },
+    {
+      "type": "url",
+      "id": "image_2_link",
+      "label": "Image 2 link"
+    },
+    {
+      "type": "select",
+      "id": "image_2_position",
+      "label": "Image 2 position",
+      "options": [
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "options": [
+        {
+          "value": "landscape",
+          "label": "Landscape"
+        },
+        {
+          "value": "portrait",
+          "label": "Portrait"
+        },
+        {
+          "value": "square",
+          "label": "Square"
+        },
+        {
+          "value": "wide",
+          "label": "Wide"
+        },
+        {
+          "value": "screen",
+          "label": "Tall screen"
+        }
+      ],
+      "default": "screen"
+    },
+    {
+      "type": "select",
+      "id": "image_fit",
+      "label": "Image fit",
+      "options": [
+        {
+          "value": "cover",
+          "label": "Cover"
+        },
+        {
+          "value": "contain",
+          "label": "Contain"
+        }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "Width",
+      "options": [
+        {
+          "value": "full",
+          "label": "Full width"
+        },
+        {
+          "value": "contained",
+          "label": "Contained"
+        }
+      ],
+      "default": "full"
+    },
+    {
+      "type": "select",
+      "id": "gap",
+      "label": "Gap",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 180,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 180,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image pair"
+    }
+  ]
+}
+{% endschema %}

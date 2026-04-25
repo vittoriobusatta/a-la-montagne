@@ -442,29 +442,14 @@
     "announcement-bar": {
       "name": "Announcement bar",
       "settings": {
-        "auto_rotate": {
-          "label": "Auto rotate announcements"
+        "marquee_speed": {
+          "label": "Scroll speed"
         },
-        "change_slides_speed": {
-          "label": "Change every"
+        "separator": {
+          "label": "Separator"
         },
-        "heading_utilities": {
-         "content": "Utilities"
-        },
-        "paragraph": {
-          "content": "Appear only on large screens"
-        },                     
-        "show_social": {
-          "label": "Social media icons",
-          "info": "[Manage social accounts](/editor?context=theme&category=social%20media)"
-        },
-        "enable_country_selector": {
-          "label": "Country/region selector",
-          "info": "[Manage countries/regions](/admin/settings/markets)"
-        },
-        "enable_language_selector": {
-          "label": "Language selector",
-          "info": "[Manage languages](/admin/settings/languages)"
+        "pause_on_hover": {
+          "label": "Pause on hover"
         }
       },
       "blocks": {

@@ -1,0 +1,120 @@
+{% liquid
+  assign hero_height_class = 'min-h-[84svh]'
+
+  case section.settings.hero_height
+    when 'small'
+      assign hero_height_class = 'min-h-[60svh]'
+    when 'medium'
+      assign hero_height_class = 'min-h-[72svh]'
+    when 'large'
+      assign hero_height_class = 'min-h-[84svh]'
+    when 'screen'
+      assign hero_height_class = 'min-h-[100svh]'
+  endcase
+%}
+
+<section
+  class="full-width relative overflow-hidden bg-gray-100 bg-cover bg-center"
+  style="
+    background-image: url({{ section.settings.image | image_url: width: 2000 }});
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  "
+>
+  <div
+    class="pointer-events-none absolute inset-0 z-0"
+    style="background-color: rgb(0 0 0 / {{ section.settings.overlay_opacity }}%)"
+  ></div>
+
+  <div class="relative z-10 flex {{ hero_height_class }} items-end justify-center p-10 uppercase">
+    <a class="text-white text-sm" href="{{ section.settings.button_link }}">
+      {{ section.settings.button_label }}
+    </a>
+  </div>
+</section>
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Hero banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 60
+    },
+    {
+      "type": "select",
+      "id": "hero_height",
+      "label": "Hero height",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        },
+        {
+          "value": "screen",
+          "label": "Full screen"
+        }
+      ],
+      "default": "large"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero banner"
+    }
+  ]
+}
+{% endschema %}
